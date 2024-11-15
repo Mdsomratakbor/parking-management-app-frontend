@@ -1,0 +1,27 @@
+
+<h4>{{ getTranslation("createNewItem") }}</h4>
+<!-- Input fields for filters -->
+<div class="search-container">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ getTranslation('title') }}</mat-label>
+    <input matInput [(ngModel)]="titleFilter" (ngModelChange)="onFilterChange()" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ getTranslation('brand') }}</mat-label>
+    <input matInput [(ngModel)]="brandFilter" (ngModelChange)="onFilterChange()" />
+  </mat-form-field>
+
+<button mat-raised-button color="primary" (click)="openDialog()">
+  {{ getTranslation('createNewItem') }}
+</button>
+</div>
+<app-generic-list
+  [displayedColumns]="displayedColumns"
+  [dataSource]="dataSource"
+  [totalCount]="totalCount"
+  [currentPage]="currentPage"
+  (dataChange)="onDataChange($event)"
+  [titleFilter]="titleFilter"
+  [brandFilter]="brandFilter">
+</app-generic-list>

@@ -1,0 +1,11 @@
+.search-container {
+  display: flex;
+  align-items: center; /* Vertically centers items */
+  gap: 16px; /* Space between items, adjust as necessary */
+  margin-bottom: 16px; /* Add some space below the search container */
+  mat-form-field {
+    flex: 1; /* Allow the form fields to grow and take up available space */
+  }
+}
+
+

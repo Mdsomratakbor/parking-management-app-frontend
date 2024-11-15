@@ -1,0 +1,16 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+mat-sidenav-content {
+  padding: 16px;
+}
+
+.active {
+  font-weight: bold;
+  color: #3f51b5;
+}
