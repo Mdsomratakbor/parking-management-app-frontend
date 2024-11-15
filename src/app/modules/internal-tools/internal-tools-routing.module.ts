@@ -1,22 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductListWithoutGenericComponent } from './components/product-list-without-generic/product-list-without-generic.component';
+import { VehicleParkingDataComponent } from './components/vehicle-parking-data/vehicle-parking-data.component';
 
 const routes: Routes = [
   {
-    path:'products',
-    component: ProductListComponent
+    path:'vehicle-parking',
+    component: VehicleParkingDataComponent
   },
-  {
-    path:'product-without-generic',
-    component: ProductListWithoutGenericComponent
-  },
-  {
-    path:'',
-    component: ProductListComponent
-  }
+  // {
+  //   path:'product-without-generic',
+  //   component: ProductListWithoutGenericComponent
+  // },
 ];
 
 @NgModule({

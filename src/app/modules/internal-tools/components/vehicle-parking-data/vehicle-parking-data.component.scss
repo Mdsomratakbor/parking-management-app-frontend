@@ -1,0 +1,17 @@
+.container {
+  margin: 16px;
+
+  .toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+
+    button {
+      font-weight: bold;
+    }
+  }
+
+  .mat-elevation-z8 {
+    overflow-x: auto;
+  }
+}

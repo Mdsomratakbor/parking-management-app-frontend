@@ -1,0 +1,190 @@
+<div class="container">
+  <mat-card class="form-card">
+    <mat-card-header class="form-header">
+      <div class="header-content">
+        <mat-card-title class="form-title">Vehicle Parking Form</mat-card-title>
+      </div>
+      <!-- Close Button -->
+      <button mat-icon-button class="close-btn" (click)="onClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-header>
+    <form [formGroup]="parkingForm" (ngSubmit)="onSubmit()">
+      <!-- Vehicle License Number -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Vehicle License Number</mat-label>
+        <input
+          matInput
+          formControlName="licenseNumber"
+          placeholder="Enter license number"
+        />
+        <mat-error *ngIf="this.parkingForm.get('licenseNumber')?.hasError('required')">
+          License number is required.
+        </mat-error>
+        <mat-error *ngIf="this.parkingForm.get('licenseNumber')?.hasError('pattern')">
+          Enter a valid license number (e.g., ABC-1234).
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Vehicle Type -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Vehicle Type</mat-label>
+        <mat-select formControlName="vehicleType">
+          <mat-option *ngFor="let type of vehicleTypes" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="this.parkingForm.get('vehicleType')?.hasError('required')">
+          Please select a vehicle type.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Owner Name -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Owner Name</mat-label>
+        <input
+          matInput
+          formControlName="ownerName"
+          placeholder="Enter owner's name"
+        />
+        <mat-error *ngIf="this.parkingForm.get('ownerName')?.hasError('required')">
+          Owner name is required.
+        </mat-error>
+        <mat-error *ngIf="this.parkingForm.get('ownerName')?.hasError('minLength')">
+          Owner name must be at least 3 characters long.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Owner Phone -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Owner Phone</mat-label>
+        <input
+          matInput
+          formControlName="ownerPhone"
+          placeholder="Enter phone number"
+          type="tel"
+        />
+        <mat-error *ngIf="this.parkingForm.get('ownerPhone')?.hasError('required')">
+          Phone number is required.
+        </mat-error>
+        <mat-error *ngIf="this.parkingForm.get('ownerPhone')?.hasError('pattern')">
+          Enter a valid phone number.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Owner Address -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Owner Address</mat-label>
+        <textarea
+          matInput
+          formControlName="ownerAddress"
+          placeholder="Enter address"
+        ></textarea>
+        <mat-error *ngIf="this.parkingForm.get('ownerAddress')?.hasError('required')">
+          Address is required.
+        </mat-error>
+        <mat-error *ngIf="this.parkingForm.get('ownerAddress')?.hasError('maxLength')">
+          Address cannot exceed 200 characters.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Status -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="in">In</mat-option>
+          <mat-option value="out">Out</mat-option>
+        </mat-select>
+        <mat-error *ngIf="this.parkingForm.get('status')?.hasError('required')">
+          Status is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Entry Date and Time -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Entry Date</mat-label>
+        <input
+          matInput
+          formControlName="entryDate"
+          [matDatepicker]="entryDatePicker"
+          placeholder="Pick a date"
+        />
+        <mat-datepicker-toggle matSuffix [for]="entryDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #entryDatePicker></mat-datepicker>
+        <mat-error *ngIf="this.parkingForm.get('entryDate')?.hasError('required')">
+          Entry date is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Entry Time</mat-label>
+        <input
+          matInput
+          [ngxTimepicker]="entryTimePicker"
+          formControlName="entryTime"
+          placeholder="Pick a time"
+        />
+        <ngx-material-timepicker #entryTimePicker></ngx-material-timepicker>
+        <mat-error *ngIf="this.parkingForm.get('entryTime')?.hasError('required')">
+          Entry time is required.
+        </mat-error>
+        <mat-error *ngIf="this.parkingForm.hasError('entryTimeRequired')">
+          Entry time is required if entry date is provided.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Exit Date and Time -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Exit Date</mat-label>
+        <input
+          matInput
+          formControlName="exitDate"
+          [matDatepicker]="exitDatePicker"
+          placeholder="Pick a date"
+        />
+        <mat-datepicker-toggle matSuffix [for]="exitDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #exitDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Exit Time</mat-label>
+        <input
+          matInput
+          [ngxTimepicker]="exitTimePicker"
+          formControlName="exitTime"
+          placeholder="Pick a time"
+        />
+        <ngx-material-timepicker #exitTimePicker></ngx-material-timepicker>
+        <mat-error *ngIf="this.parkingForm.hasError('exitTimeRequired')">
+          Exit time is required if exit date is provided.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Parking Charge -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Parking Charge</mat-label>
+        <input
+          matInput
+          formControlName="parkingCharge"
+          placeholder="Enter charge"
+          type="number"
+        />
+        <mat-error *ngIf="this.parkingForm.get('parkingCharge')?.hasError('required')">
+          Parking charge is required.
+        </mat-error>
+        <mat-error *ngIf="this.parkingForm.get('parkingCharge')?.hasError('min')">
+          Charge must be a positive number.
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="parkingForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </mat-card>
+</div>

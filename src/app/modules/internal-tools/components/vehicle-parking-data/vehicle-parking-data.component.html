@@ -1,0 +1,72 @@
+<div class="container">
+  <!-- Add Button -->
+  <div class="toolbar">
+    <button mat-raised-button color="primary" (click)="onAddVehicle()">
+      Add Vehicle
+    </button>
+  </div>
+
+  <!-- Vehicle Table -->
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <!-- Owner Name Column -->
+    <ng-container matColumnDef="ownerName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Owner Name </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.ownerName }} </mat-cell>
+    </ng-container>
+
+    <!-- Vehicle Type Column -->
+    <ng-container matColumnDef="vehicleType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Vehicle Type </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.vehicleType }} </mat-cell>
+    </ng-container>
+
+    <!-- License Number Column -->
+    <ng-container matColumnDef="licenseNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> License No </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.licenseNumber }} </mat-cell>
+    </ng-container>
+
+    <!-- Entry Time Column -->
+    <ng-container matColumnDef="entryTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Entry Time </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle">
+        {{ vehicle.entryTime | date: 'short' }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Exit Time Column -->
+    <ng-container matColumnDef="exitTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Exit Time </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle">
+        {{ vehicle.exitTime ? (vehicle.exitTime | date: 'short') : 'N/A' }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.status }} </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle">
+        <button mat-icon-button color="accent" (click)="onEditVehicle(vehicle)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    [pageSize]="10"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
