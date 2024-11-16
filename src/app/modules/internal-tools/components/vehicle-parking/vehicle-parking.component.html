@@ -9,7 +9,11 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-card-header>
-    <form [formGroup]="parkingForm" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="loading" class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <form *ngIf="!loading" [formGroup]="parkingForm" (ngSubmit)="onSubmit()">
       <!-- Vehicle License Number -->
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Vehicle License Number</mat-label>

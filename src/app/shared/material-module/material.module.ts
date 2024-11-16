@@ -25,7 +25,7 @@ import {  MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import {  MatCardModule } from '@angular/material/card';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   imports: [
     A11yModule,
@@ -54,6 +54,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     A11yModule,
@@ -84,7 +85,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatProgressSpinnerModule
    ],
 })
 export class MaterialModule {

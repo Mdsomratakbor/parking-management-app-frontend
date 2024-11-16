@@ -8,12 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { VehicleParkingDashboardComponent } from './internal-tools/components/vehicle-parking-dashboard/vehicle-parking-dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    VehicleParkingDashboardComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

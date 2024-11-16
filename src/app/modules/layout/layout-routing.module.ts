@@ -4,11 +4,11 @@ import { LayoutComponent } from './layout.component';
 
 const routes: Routes = [
   {
-    path: 'internal',
+    path: 'vehicle',
     component: LayoutComponent,
     loadChildren: () => import('../internal-tools/internal-tools.module').then((m) => m.InternalToolsModule),
   },
-   { path: '', redirectTo: 'internal', pathMatch: 'full' },
+   { path: '', redirectTo: 'vehicle/dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },
 ];
 

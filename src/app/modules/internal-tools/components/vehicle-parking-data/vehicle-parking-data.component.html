@@ -1,13 +1,18 @@
 <div class="container">
-  <!-- Add Button -->
+<div class="toolbar-container">
+  <h5 class="title">Vehicle Parking List</h5>
   <div class="toolbar">
-    <button mat-raised-button color="primary" (click)="onAddVehicle()">
+    <button mat-raised-button color="primary" (click)="onAddVehicle(0)">
       Add Vehicle
     </button>
   </div>
+</div>
 
+<div *ngIf="loading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
   <!-- Vehicle Table -->
-  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <mat-table  *ngIf="!loading"  [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <!-- Owner Name Column -->
     <ng-container matColumnDef="ownerName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Owner Name </mat-header-cell>
@@ -52,7 +57,7 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
       <mat-cell *matCellDef="let vehicle">
-        <button mat-icon-button color="accent" (click)="onEditVehicle(vehicle)">
+        <button mat-icon-button color="accent" (click)="onAddVehicle(vehicle.vehicleId)">
           <mat-icon>edit</mat-icon>
         </button>
       </mat-cell>
@@ -63,10 +68,12 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <!-- Pagination -->
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 25]"
-    [pageSize]="10"
+  <!-- MatPaginator for Pagination -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]"
+    [length]="totalCount"
+    [pageSize]="pageSize"
+    [pageIndex]="currentPage"
     showFirstLastButtons
-  ></mat-paginator>
+    (page)="onPaginateChange($event)">
+  </mat-paginator>
 </div>

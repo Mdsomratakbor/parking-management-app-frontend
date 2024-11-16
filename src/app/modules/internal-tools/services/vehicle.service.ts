@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseMessage } from '../../../shared/models/response';
 import { environment } from '../../../../environments/environment';
-import { Vehicle } from '../models/vehicle.model';
+import { Vehicle, VehicleList } from '../models/vehicle.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +19,16 @@ export class VehicleService {
     return this.http.post<ResponseMessage>(`${this.apiUrl}vehicle`, vehicle, { headers });
   }
 
-  // getProducts(title?: string, brand?: string, pageNumber: number = 1, pageSize: number = 10): Observable<any> {
-  //   const params = { title, brand, pageNumber: pageNumber.toString(), pageSize: pageSize.toString() };
-  //   return this.http.get<any>(`${this.apiUrl}/api/product/list`, {  params:  params }); // Adjust the API endpoint
-  // }
+  updateVehicle(vehicle: VehicleList): Observable<ResponseMessage> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<ResponseMessage>(`${this.apiUrl}vehicle/${vehicle.vehicleId}`, vehicle, { headers });
+  }
 
-  getProducts(
-    title: string, brand: string, pageNumber: number = 1, pageSize: number = 10
+  getVehicles(
+    pageNumber: number = 1, pageSize: number = 10
   ): Observable<any> {
-    return this.http.get(`${this.apiUrl}product/list`, {
+    return this.http.get(`${this.apiUrl}vehicle`, {
       params: {
-        title: title,
-        brand: brand,
         pageNumber: pageNumber,
         pageSize: pageSize
       },
@@ -38,4 +36,11 @@ export class VehicleService {
     });
   }
 
+  getVehicle(
+    id:number
+  ): Observable<any> {
+    return this.http.get(`${this.apiUrl}vehicle/${id}`, {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+    });
+  }
 }
