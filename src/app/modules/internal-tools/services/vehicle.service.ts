@@ -43,4 +43,14 @@ export class VehicleService {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
     });
   }
+  getDashboardData(
+    date:string,
+  ): Observable<any> {
+    return this.http.get(`${this.apiUrl}vehicle/dashboard`, {
+      params:{
+         date : date
+      },
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+    });
+  }
 }

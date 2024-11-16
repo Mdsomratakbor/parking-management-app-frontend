@@ -181,14 +181,21 @@
         </mat-error>
       </mat-form-field>
 
+
+
       <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="parkingForm.invalid"
-      >
-        Submit
-      </button>
+  mat-raised-button
+  color="primary"
+  type="submit"
+  [disabled]="parkingForm.invalid || isSubmitting"
+>
+  <mat-spinner
+    *ngIf="isSubmitting"
+    diameter="20"
+    style="display: inline-block; vertical-align: middle;"
+  ></mat-spinner>
+  <span *ngIf="!isSubmitting">Submit</span>
+</button>
     </form>
   </mat-card>
 </div>

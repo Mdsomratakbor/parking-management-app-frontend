@@ -14,6 +14,7 @@ export class VehicleParkingComponent {
   vehicleId:number = 0;
   vehicleTypes: string[] = ['MicroBus', 'Car', 'Truck', 'Bike'];
   loading:boolean = true;
+  isSubmitting = false;
   parkingCharges:{ [key: string]: number } = {
     "Car": 10,
     "Truck": 20,
@@ -142,7 +143,7 @@ export class VehicleParkingComponent {
 
 
   onClose(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({data:true});
   }
 
   getVehicleById() {
@@ -234,27 +235,33 @@ export class VehicleParkingComponent {
 
 
   private createVehicle(formData: any): void {
+    this.isSubmitting = true;
     this.vehicleService.createVehicle(formData).subscribe(
       (response) => {
         console.log('Vehicle created successfully:', response);
         this.handleSuccess('Vehicle registered successfully!', formData);
+        this.isSubmitting = false;
       },
       (error) => {
         console.error('Error creating vehicle:', error);
         this.handleError('Failed to register the vehicle. Please try again.');
+        this.isSubmitting = false;
       }
     );
   }
 
   private updateVehicle(formData: any): void {
+    this.isSubmitting = true;
     this.vehicleService.updateVehicle(formData).subscribe(
       (response) => {
         console.log('Vehicle updated successfully:', response);
         this.handleSuccess('Vehicle updated successfully!');
+        this.isSubmitting = false;
       },
       (error) => {
         console.error('Error updating vehicle:', error);
         this.handleError('Failed to update the vehicle. Please try again.');
+        this.isSubmitting = false;
       }
     );
   }

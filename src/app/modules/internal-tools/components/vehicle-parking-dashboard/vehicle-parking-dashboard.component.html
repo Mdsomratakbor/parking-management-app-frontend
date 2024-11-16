@@ -1,1 +1,70 @@
-<p>vehicle-parking-dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Date Filter -->
+  <div class="filter-section">
+    <mat-form-field>
+      <mat-label>Select Date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate"  (dateChange)="onDateChange($event)" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards">
+    <mat-card>
+      <mat-card-title>Total Cars Parked</mat-card-title>
+      <mat-card-content>
+        <h2>{{ totalCarsParked }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Total Empty Slots</mat-card-title>
+      <mat-card-content>
+        <h2>{{ totalEmptySlots }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Vehicle Type Info</mat-card-title>
+      <mat-card-content>
+        <ul>
+          <li *ngFor="let type of vehicleTypeInfo">{{ type.vehicleType }}: {{ type.count }}</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Vehicles Parked > 2 Hours</mat-card-title>
+      <mat-card-content>
+        <h2>{{ vehiclesParkedLong }}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-section">
+    <div class="chart-container">
+      <h3>Pie Chart: Vehicles Currently Parked</h3>
+      <ngx-charts-pie-chart
+        [view]="[700, 400]"
+        [results]="pieChartData"
+        [legend]="true"
+        [labels]="true">
+      </ngx-charts-pie-chart>
+    </div>
+
+    <div class="chart-container">
+      <h3>Line Chart: Parking Summary</h3>
+      <ngx-charts-line-chart
+        [view]="[700, 400]"
+        [results]="lineChartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [xAxisLabel]="'Time'"
+        [yAxisLabel]="'Number of Cars'"
+        [autoScale]="true">
+      </ngx-charts-line-chart>
+    </div>
+  </div>
+</div>
