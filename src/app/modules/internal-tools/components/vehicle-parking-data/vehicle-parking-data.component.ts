@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { VehicleService } from '../../services/vehicle.service';
 import { VehicleList } from '../../models/vehicle.model';
 import { MatPaginator } from '@angular/material/paginator';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-vehicle-parking-data',
@@ -12,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrl: './vehicle-parking-data.component.scss'
 })
 export class VehicleParkingDataComponent {
-
+  isSmallScreen: boolean = false;
   dataSource = new MatTableDataSource<VehicleList>();
   pageSize: number = 5;
   totalCount: number = 0;
@@ -29,10 +30,15 @@ export class VehicleParkingDataComponent {
     'actions'
   ];
 
-  constructor(private vehicleService: VehicleService, private dialog: MatDialog) {}
+  constructor(private vehicleService: VehicleService, private dialog: MatDialog,private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
     this.loadData();
+    this.breakpointObserver
+    .observe([Breakpoints.Small, Breakpoints.XSmall])
+    .subscribe((result) => {
+      this.isSmallScreen = result.matches;
+    });
   }
 
 

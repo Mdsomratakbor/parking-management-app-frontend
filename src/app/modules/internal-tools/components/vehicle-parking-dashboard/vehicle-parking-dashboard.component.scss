@@ -4,14 +4,25 @@
   flex-direction: column;
   gap: 20px;
 
-  .filter-section {
-    display: flex;
-    justify-content: flex-start;
-    gap: 16px;
-    mat-form-field {
-      width: 250px;
-    }
+ /* Date Filter Section */
+ .filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-bottom: gray .1px dashed;
+  gap: 1rem;
+
+  .mat-form-field {
+    flex: 1 1 200px;
+    min-width: 200px;
   }
+
+  button {
+    flex: 1 1 200px;
+    max-width: 200px;
+    margin-top: 1rem;
+  }
+}
 
   .summary-cards {
     display: grid;
@@ -26,7 +37,7 @@
       }
       mat-card-content h2 {
         font-size: 2rem;
-        color: #4caf50;
+        color: #28427e;
       }
     }
   }

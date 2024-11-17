@@ -1,8 +1,12 @@
-<mat-sidenav-container>
+<mat-sidenav-container style="min-height: 100vh;">
   <!-- Sidenav (Menu) -->
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened" style="background-color: #2c3e50; color: white;">
+  <mat-sidenav
+    #sidenav
+    [mode]="isSmallScreen ? 'over' : 'side'"
+    [(opened)]="opened"
+    style="background-color: #2c3e50; color: white;">
     <!-- Website Icon -->
-    <div style="padding: 16px; text-align: center; border-bottom:1px solid white">
+    <div style="padding: 16px; text-align: center; border-bottom: 1px solid white;">
       <h5 style="color: white !important;">PMS</h5>
     </div>
 
@@ -18,13 +22,22 @@
   <mat-sidenav-content>
     <!-- Topbar with toggle icon and dropdown -->
     <mat-toolbar style="background-color: #34495e; color: white;">
-      <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav" style="color: white;">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        aria-label="Toggle sidenav"
+        style="color: white;"
+        *ngIf="isSmallScreen">
         <mat-icon>menu</mat-icon>
       </button>
       <span style="flex-grow: 1;">Parking Management System</span>
 
       <!-- Profile Dropdown -->
-      <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="Open profile menu" style="color: white;">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="profileMenu"
+        aria-label="Open profile menu"
+        style="color: white;">
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #profileMenu="matMenu">
