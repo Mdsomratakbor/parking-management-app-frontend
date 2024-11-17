@@ -19,23 +19,16 @@ export class VehicleParkingDashboardComponent {
 
     }
   totalCarsParked = 0;
-  totalEmptySlots = 0; // Example data
+  totalEmptySlots = 0;
   vehicleTypeInfo:VehicleTypeInfo [] = [];
-  vehiclesParkedLong = 0; // Example data for vehicles > 2 hours
+  vehiclesParkedLong = 0;
 
-  // Chart data
   pieChartData:{name:string, value:number} [] = [];
 
-  lineChartData = [
-    {
-      name: 'Parking Summary',
-      series: [
-        { name: 'Day 1', value: 30 },
-        { name: 'Day 2', value: 40 },
-        { name: 'Day 3', value: 25 },
-        { name: 'Day 4', value: 35 },
-      ],
-    },
+  lineChartData:    {
+    name: string,
+    series: [{ name: string, value: number }]}[] = [
+
   ];
 
   ngOnInit(): void {
