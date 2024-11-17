@@ -7,6 +7,7 @@
   .filter-section {
     display: flex;
     justify-content: flex-start;
+    gap: 16px;
     mat-form-field {
       width: 250px;
     }

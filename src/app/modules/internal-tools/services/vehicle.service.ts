@@ -44,11 +44,15 @@ export class VehicleService {
     });
   }
   getDashboardData(
-    date:string,
+    startDate:string,
+    endDate:string,
+    interval:string
   ): Observable<any> {
     return this.http.get(`${this.apiUrl}vehicle/dashboard`, {
       params:{
-         date : date
+        startDate : startDate,
+        endDate:endDate,
+        interval:interval
       },
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
     });

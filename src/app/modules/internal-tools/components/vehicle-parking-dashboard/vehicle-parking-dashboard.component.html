@@ -1,14 +1,33 @@
 <div class="dashboard-container">
   <!-- Date Filter -->
   <div class="filter-section">
-    <mat-form-field>
-      <mat-label>Select Date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate"  (dateChange)="onDateChange($event)" />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+    <!-- Start Date -->
+    <mat-form-field appearance="fill">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="startPicker" [(ngModel)]="startDate" (dateChange)="onDateChange('start', $event)" />
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
-  </div>
 
+    <!-- End Date -->
+    <mat-form-field appearance="fill">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" (dateChange)="onDateChange('end', $event)" />
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Interval -->
+    <mat-form-field appearance="fill">
+      <mat-label>Interval</mat-label>
+      <mat-select [(value)]="selectedInterval" (selectionChange)="onIntervalChange($event)">
+        <mat-option *ngFor="let interval of intervals" [value]="interval">{{ interval }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Filter Button -->
+    <button mat-raised-button color="primary" (click)="applyFilter()">Apply Filter</button>
+  </div>
   <!-- Summary Cards -->
   <div class="summary-cards">
     <mat-card>

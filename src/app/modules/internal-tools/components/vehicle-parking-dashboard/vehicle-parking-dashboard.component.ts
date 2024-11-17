@@ -8,7 +8,10 @@ import { VehicleTypeInfo } from '../../models/vehicle-type-info';
   styleUrl: './vehicle-parking-dashboard.component.scss'
 })
 export class VehicleParkingDashboardComponent {
-  selectedDate: Date = new Date();
+  startDate: Date  = new Date();
+  endDate: Date = new Date();
+  selectedInterval: string = '';
+  intervals: string[] = ['Daily', 'Weekly', 'Monthly'];
 
   constructor(
     public vehicleService:VehicleService) {
@@ -39,12 +42,20 @@ export class VehicleParkingDashboardComponent {
     this.loadDashboardData();
   }
 
-  onDateChange(event: any): void {
-    this.selectedDate = event.value;
-    this.loadDashboardData();
+  onDateChange(type: string, event: any): void {
+    if (type === 'start') this.startDate = event.value;
+    if (type === 'end') this.endDate = event.value;
+  }
+
+  onIntervalChange(event: any): void {
+    this.selectedInterval = event.value;
+  }
+
+  applyFilter(): void {
+   this.loadDashboardData();
   }
   loadDashboardData(): void {
-    this.vehicleService.getDashboardData(this.selectedDate.toISOString()).subscribe(
+    this.vehicleService.getDashboardData(this.startDate.toISOString(), this.endDate?.toISOString(), this.selectedInterval).subscribe(
       (data) => {
         this.totalCarsParked = data.totalCarsParked;
         this.totalEmptySlots = data.totalEmptySlots;
@@ -54,23 +65,18 @@ export class VehicleParkingDashboardComponent {
 
 
         // Prepare data for pie chart
-        this.pieChartData = this.vehicleTypeInfo.map((type) => ({
+        this.pieChartData = data.pieChart.map((type:any) => ({
           name: type.vehicleType,
           value: type.count,
         }));
 
-        // Example line chart data; replace with dynamic data if available
-        this.lineChartData = [
-          {
-            name: 'Parking Summary',
-            series: [
-              { name: 'Day 1', value: 30 },
-              { name: 'Day 2', value: 40 },
-              { name: 'Day 3', value: 25 },
-              { name: 'Day 4', value: 35 },
-            ],
-          },
-        ];
+        this.lineChartData = data.lineChart.map((type: any) => ({
+          name: "Parking Summary",
+          series: type.timePeriods.map((period: any) => ({
+            name: period.timePeriod,
+            value: period.count
+          }))
+        }));
       },
       (error:any) => {
         console.error('Error fetching dashboard data', error);
