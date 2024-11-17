@@ -58,7 +58,7 @@ export class VehicleParkingDataComponent {
         });
         dialogRef.afterClosed().subscribe((result) => {
           if (result.data) {
-            window.location.reload()
+            this.loadData();
           } else {
             console.log("not export", result);
           }
