@@ -4,9 +4,9 @@
     #sidenav
     [mode]="isSmallScreen ? 'over' : 'side'"
     [(opened)]="opened"
-    style="background-color: #2c3e50; color: white;">
+    style="background-color: #34495e; color: white; border-radius:0px !important;">
     <!-- Website Icon -->
-    <div style="padding: 16px; text-align: center; border-bottom: 1px solid white;">
+    <div style="padding: 14px; text-align: center; border-bottom: .002px solid white;">
       <h5 style="color: white !important;">PMS</h5>
     </div>
 
@@ -19,7 +19,7 @@
   </mat-sidenav>
 
   <!-- Main Content -->
-  <mat-sidenav-content>
+  <mat-sidenav-content style="padding: 0px !important;">
     <!-- Topbar with toggle icon and dropdown -->
     <mat-toolbar style="background-color: #34495e; color: white;">
       <button
@@ -31,6 +31,9 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span style="flex-grow: 1;">Parking Management System</span>
+
+
+
 
       <!-- Profile Dropdown -->
       <button
