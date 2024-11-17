@@ -10,7 +10,7 @@ import { VehicleTypeInfo } from '../../models/vehicle-type-info';
 export class VehicleParkingDashboardComponent {
   startDate: Date  = new Date();
   endDate: Date = new Date();
-  selectedInterval: string = '';
+  selectedInterval: string = 'Daily';
   intervals: string[] = ['Daily', 'Weekly', 'Monthly'];
 
   constructor(
@@ -57,22 +57,27 @@ export class VehicleParkingDashboardComponent {
 
 
 
-        // Prepare data for pie chart
+
         this.pieChartData = data.pieChart.map((type:any) => ({
           name: type.vehicleType,
           value: type.count,
         }));
 
-        this.lineChartData = data.lineChart.map((type: any) => ({
-          name: "Parking Summary",
-          series: type.timePeriods.map((period: any) => ({
-            name: period.timePeriod,
-            value: period.count
-          }))
-        }));
+        this.lineChartData = [
+          {
+            name: "Parking Summary",
+            series: Array.isArray(data?.lineChart)
+              ? data.lineChart.map((period: any) => ({
+                  name: period?.timePeriod || "Unknown Period",
+                  value: period?.count ?? 0
+                }))
+              : []
+          }
+        ];
+
       },
       (error:any) => {
-        console.error('Error fetching dashboard data', error);
+        console.log('Error fetching dashboard data', error);
       }
     );
   }
