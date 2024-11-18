@@ -15,7 +15,7 @@ export class VehicleParkingDashboardComponent {
 
   constructor(
     public vehicleService:VehicleService) {
-        this.loadDashboardData();
+       this.loadDashboardData();
 
     }
   totalCarsParked = 0;

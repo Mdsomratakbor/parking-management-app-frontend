@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SignalRService } from './shared/services/signal-r.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'parking-management-system-app';
+
+  constructor() {}
+
+  ngOnInit(): void {
+
+  }
 }

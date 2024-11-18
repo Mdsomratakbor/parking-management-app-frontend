@@ -35,6 +35,32 @@
       </button>
       <span style="flex-grow: 1;">Parking Management System</span>
 
+      <!-- Vehicle Notification -->
+      <button
+      mat-icon-button
+      [matMenuTriggerFor]="vehicleNotificationMenu"
+      aria-label="Open vehicle notifications"
+      style="color: white; margin-right: 10px;">
+      <mat-icon>notifications</mat-icon>
+      <span *ngIf=" signalRService?.vehicles?.length > 0"
+            style="background: rgb(242, 27, 27); color: white; border-radius: 50%; padding: 2px 5px; font-size: 10px; position: absolute; top: 5px; right: 3px;">
+        {{ this.signalRService.vehicles.length }}
+      </span>
+      </button>
+      <mat-menu #vehicleNotificationMenu="matMenu">
+        <ng-container *ngIf="signalRService.vehicles.length > 0; else noNotifications">
+          <button mat-menu-item *ngFor="let vehicle of signalRService.vehicles" style="border-bottom: .2px solid white;">
+            <mat-icon>directions_car</mat-icon>
+            <span>{{ vehicle.licenseNumber }} - {{ vehicle.ownerName }} - {{ vehicle.entryTime | date:'short' }}</span>
+          </button>
+        </ng-container>
+      <ng-template #noNotifications>
+        <button mat-menu-item disabled>
+          <mat-icon>info</mat-icon>
+          <span>No notifications</span>
+        </button>
+      </ng-template>
+      </mat-menu>
 
 
 

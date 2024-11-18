@@ -2,25 +2,6 @@ mat-sidenav-container {
   height: 100%;
 }
 
-.notification-window {
-  background-color: #f1c40f;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-
-.notification-window h3 {
-  margin-bottom: 10px;
-}
-
-.notification-window p {
-  margin: 5px 0;
-}
-
-.notification-window button {
-  margin-top: 10px;
-}
 
 mat-sidenav {
   width: 250px;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { SignalRService } from '../../shared/services/signal-r.service';
 
 @Component({
   selector: 'app-layout',
@@ -11,7 +12,11 @@ export class LayoutComponent implements OnInit {
   opened: boolean = true;
   vehicleToNotify: any = null;
   notificationMessage:string =""
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  public signalRService: SignalRService;
+  constructor(private breakpointObserver: BreakpointObserver, private _signalRService: SignalRService) {
+    this.signalRService = _signalRService ?? { vehicles: [] };
+
+  }
 
   ngOnInit(): void {
     this.breakpointObserver
@@ -20,13 +25,11 @@ export class LayoutComponent implements OnInit {
         this.isSmallScreen = result.matches;
         this.opened = !this.isSmallScreen;
       });
-  }
-  checkForParkedVehicles() {
 
+      this.signalRService.startConnection();
+      this.signalRService.addVehicleUpdateListener();
   }
-  sendPushNotification(){
 
-  }
   logout() {
     console.log('Logout triggered');
   }

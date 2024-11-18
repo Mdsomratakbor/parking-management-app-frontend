@@ -121,17 +121,33 @@ export class VehicleParkingComponent {
     const entryTime = control.get('entryTime');
     const exitDate = control.get('exitDate');
     const exitTime = control.get('exitTime');
+    const status = control.get('status');
+
+
+    if (entryTime?.value && !entryDate?.value) {
+      return { entryDateRequired: true };
+    }
 
     if (entryDate?.value && !entryTime?.value) {
       return { entryTimeRequired: true };
+    }
+
+    if (exitTime?.value && !exitDate?.value) {
+      return { exitDateRequired: true };
     }
 
     if (exitDate?.value && !exitTime?.value) {
       return { exitTimeRequired: true };
     }
 
+    if ((status?.value === 'out' || exitDate?.value) && !exitTime?.value) {
+      return { exitTimeRequired: true };
+    }
+
     return null;
   }
+
+
 
   updateParkingCharge(vehicleType: string) {
     if (vehicleType && this.parkingCharges[vehicleType]) {
@@ -319,7 +335,6 @@ export class VehicleParkingComponent {
         parseInt(minutes)
       );
 
-      // Format manually to keep local time
       const localIsoString = `${localDate.getFullYear()}-${String(
         localDate.getMonth() + 1
       ).padStart(2, '0')}-${String(localDate.getDate()).padStart(2, '0')}T${String(

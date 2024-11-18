@@ -3,5 +3,6 @@
 
 export const environment = {
   production: true,
-  baseUrl: 'https://localhost:7031/api/',
+  baseUrl: 'https://g277crrh-7290.asse.devtunnels.ms/api/',
+   hubUrl:'https://g277crrh-7290.asse.devtunnels.ms/'
 };
